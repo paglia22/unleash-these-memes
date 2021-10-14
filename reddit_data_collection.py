@@ -21,7 +21,6 @@ columns_to_save = ["brandname", "author", "author_fullname", "created_utc", "ful
                              "subreddit_id", "subreddit_subscribers", "thumbnail", "title", "upvote_ratio", "url",
                              "created"]
 
-
 # The function below uses the PushShift API to retrieve Reddit data
 # It takes two parameters: a subreddit list and a list containing all the brands we are interested to
 def collect_reddit_data(subreddit_list, brand_list):
