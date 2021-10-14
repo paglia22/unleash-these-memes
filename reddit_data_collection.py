@@ -16,7 +16,10 @@ my_subreddit_list = ["memes", "dankmemes", "memeeconomy", "adviceanimals", "terr
 my_brand_list_full = ["gucci", "netflix", "colgate", "alexa", "gamestop", "lg", "iphone", "oreo", "walmart", "chipotle", "mcdonald", "astrazeneca", "uber eats", "coca cola", "michelin", "nike", "doritos", "tesla", "volkswagen", "xbox", "ford", "Disneyland", "amazon fire", "amd", "blackberry", "apple", "intel", "nokia", "samsung", "nintendo", "android", "burger king", "kfc", "taco bell", "wendy", "five guys", "starbucks", "vine", "apple music", "amazon prime", "wikipedia", "blockbuster", "spotify", "microsoft", "EA", "mountain dew", "diet coke", "adidas", "pringles", "audi", "bmw", "playstation"]
 
 columns_to_drop = ["all_awardings", "author_flair_text", "allow_live_comments", "author_flair_css_class", "author_flair_richtext", "author_flair_type", "author_patreon_flair", "author_premium", "awarders", "can_mod_post", "contest_mode", "gildings", "is_crosspostable", "is_meta", "is_original_content", "link_flair_background_color", "link_flair_richtext", "link_flair_text_color", "link_flair_type", "locked", "media_only", "no_follow", "num_crossposts", "over_18", "parent_whitelist_status", "pinned", "preview", "pwls", "selftext", "send_replies", "spoiler", "stickied", "subreddit_type", "thumbnail_height", "thumbnail_width", "total_awards_received", "treatment_tags", "url_overridden_by_dest", "whitelist_status", "wls", "author_flair_background_color", "author_flair_template_id", "author_flair_text_color", "author_cakeday", "media", "media_embed", "secure_media", "secure_media_embed", "link_flair_text", "link_flair_css_class", "link_flair_template_id", "steward_reports", "suggested_sort", "updated_utc", "og_description", "og_title", "gilded", "author_id", "rte_mode", "brand_safe", "crosspost_parent", "crosspost_parent_list", "author_created_utc", "mod_reports", "user_reports", "removed_by_category", "removed_by", "is_self"]
-columns_to_save = ["brandname", "author", "author_fullname", "created_utc", "domain", "full_link", "id", "is_reddit_media_domain", "is_robot_indexable", "is_video", "num_comments", "permalink", "post_hint", "retrieved_on", "score", "subreddit", "subreddit_id", "subreddit_subscribers", "thumbnail", "title", "upvote_ratio", "url", "created"]
+columns_to_save = ["brandname", "author", "author_fullname", "created_utc", "full_link", "id",
+                             "is_robot_indexable", "num_comments", "permalink", "retrieved_on", "score", "subreddit",
+                             "subreddit_id", "subreddit_subscribers", "thumbnail", "title", "upvote_ratio", "url",
+                             "created"]
 
 
 # The function below uses the PushShift API to retrieve Reddit data
@@ -143,15 +146,9 @@ def clean_dataset(dataset_name):
     # Call the function to remove the deleted images
     df = remove_deleted_images(df)
 
-    # Remove other columns that now we do not need no more
-    final_columns_to_save = ["brandname", "author", "author_fullname", "created_utc", "full_link", "id",
-                             "is_robot_indexable", "num_comments", "permalink", "retrieved_on", "score", "subreddit",
-                             "subreddit_id", "subreddit_subscribers", "thumbnail", "title", "upvote_ratio", "url",
-                             "created"]
     lst_cos = ["author", "author_fullname", "created_utc", "full_link", "id", "is_robot_indexable", "num_comments",
                "permalink", "retrieved_on", "score", "subreddit", "subreddit_id", "subreddit_subscribers", "thumbnail",
                "title", "upvote_ratio", "url", "created"]
-    df.drop(df.columns.difference(final_columns_to_save), 1, inplace=True)
 
     # Eliminate duplicates
     # if the meme shows two or more brands, add them in "brandname" separeted with comas
