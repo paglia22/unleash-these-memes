@@ -23,6 +23,9 @@ def text_preprocessing(text):
     return text
 
 my_brand_list_full = ["gucci", "netflix", "colgate", "alexa", "gamestop", "lg", "iphone", "oreo", "walmart", "chipotle", "mcdonald", "astrazeneca", "uber eats", "coca cola", "michelin", "nike", "doritos", "tesla", "volkswagen", "xbox", "ford", "Disneyland", "amazon fire", "amd", "blackberry", "apple", "intel", "nokia", "samsung", "nintendo", "android", "burger king", "kfc", "taco bell", "wendy", "five guys", "starbucks", "vine", "apple music", "amazon prime", "wikipedia", "blockbuster", "spotify", "microsoft", "EA", "mountain dew", "diet coke", "adidas", "pringles", "audi", "bmw", "playstation"]
+
+# The following function will perform Optical Character Recognition (OCR) on memes
+# The goal is to retrieve the text contained inside each meme image
 def ocr_meme(filename):
     img = cv2.imread(filename)
     img = cv2.bilateralFilter(img, 5, 55, 60) # Bilateral Filter
@@ -65,7 +68,7 @@ def ocr_meme(filename):
         return text_2
 
 def read_backup():
-    a_file = open("/Users/paglia/Desktop/ProveTesi/obj/OCR_backup.txt", "r")
+    a_file = open("OCR_backup.txt", "r")
     list = []
     for line in a_file:
       stripped_line = line.strip()
@@ -74,12 +77,12 @@ def read_backup():
     return list
 
 def execute_ocr_on_dataset():
-    df = pd.read_csv("/Users/paglia/Desktop/ProveTesi/memes_dataset_final.csv")
+    df = pd.read_csv("memes_dataset_final.csv")
 
     backup_list = read_backup()
     len_list = len(backup_list)
 
-    directory = "/Users/paglia/Desktop/ProveTesi/images"
+    directory = "/images"
     text_lst = []
 
     text_lst = backup_list
@@ -114,21 +117,5 @@ def execute_ocr_on_dataset():
     df.to_csv("OCR.csv")
 
 #execute_ocr_on_dataset()
-#print(ocr_meme("/Users/paglia/Desktop/ProveTesi/images/apple_hemoiu.png"))
 
 
-
-
-
-
-def imageai_detection():
-    execution_path = os.getcwd()
-
-    detector = ObjectDetection()
-    detector.setModelTypeAsRetinaNet()
-    detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.1.0.h5"))
-    detector.loadModel()
-    detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "image.jpeg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
-
-    for eachObject in detections:
-        print(eachObject["name"] , " : " , eachObject["percentage_probability"] )
