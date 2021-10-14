@@ -1,4 +1,7 @@
-#unleash-these-memes
+Unleash these memes! - Extracting topics from Reddit memes
+Nicolò Pagliari, June 2021
+LUISS Guido Carli University
+
 
 ENG:
 How can brands analyze Internet memes to identify critiques or compliments about products or services? And how should they respond to those memes? These are the two research questions that I have chosen for my bachelor's degree thesis. 
